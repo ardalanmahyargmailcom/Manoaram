@@ -256,7 +256,7 @@
             font-size: 2em;
             color: #f06292;
             white-space: nowrap;
-            opacity: 1;
+            opacity: 0; /*  تغییر داده شده: شروع با opacity: 0 برای تست */
             animation: textFountain 1.5s ease-out forwards; /*  انیمیشن فواره */
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
@@ -304,6 +304,25 @@
 
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() { //  اضافه شده:  DOMContentLoaded
+            const foreverButton = document.getElementById('foreverButton');
+            const fountainContainer = document.getElementById('fountainContainer');
+
+            foreverButton.addEventListener('click', function() {
+                console.log('Button clicked!'); //  اضافه شده: console.log برای تست
+
+                const fountainText = document.createElement('div');
+                fountainText.classList.add('fountain-text');
+                fountainText.innerText = 'For Ever';
+                fountainContainer.appendChild(fountainText);
+
+                //  حذف متن فواره بعد از اتمام انیمیشن
+                fountainText.addEventListener('animationend', function() {
+                    fountainText.remove();
+                });
+            });
+        });
+
         function calculateElapsedTime() {
             const startDate = new Date('2024-08-18T11:17:00');
             const now = new Date();
@@ -331,18 +350,7 @@
         calculateElapsedTime();
         setInterval(calculateElapsedTime, 1000);
 
-        document.getElementById('foreverButton').addEventListener('click', function() {
-            const fountainContainer = document.getElementById('fountainContainer');
-            const fountainText = document.createElement('div');
-            fountainText.classList.add('fountain-text');
-            fountainText.innerText = 'For Ever';
-            fountainContainer.appendChild(fountainText);
 
-            //  حذف متن فواره بعد از اتمام انیمیشن
-            fountainText.addEventListener('animationend', function() {
-                fountainText.remove();
-            });
-        });
     </script>
 
 </body>
