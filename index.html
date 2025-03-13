@@ -6,101 +6,33 @@
     <title>Aram and Mahyar</title>
     <style>
         body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: #ffe0b2;
+            font-family: Arial, sans-serif; /* فونت ساده */
+            background-color: #fce4ec; /* پس زمینه صورتی ملایم */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             flex-direction: column;
-            color: #795548;
+            color: #e91e63; /* رنگ متن عاشقانه */
         }
 
-        @font-face {
-            font-family: 'Vazirmatn';
-            src: url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff2') format('woff2'),
-                 url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
+        .heart-frame {
+            width: 200px; /* اندازه قاب */
+            height: 200px; /* اندازه قاب */
+            background-color: #ffdde1; /* رنگ پس زمینه قلب */
+            clip-path: path('M0 100 V 0 C 50 0, 50 0, 100 0 V 100 Z'); /* شکل قلب */
+            display: flex; /* برای مرکز قرار دادن متن */
+            justify-content: center; /* برای مرکز قرار دادن متن */
+            align-items: center; /* برای مرکز قرار دادن متن */
+            text-align: center; /* برای مرکز قرار دادن متن */
         }
-
-        h1 {
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
-            color: #e65100;
-        }
-
-        .heart-container {
-            position: relative;
-            width: 250px;
-            height: 250px;
-            margin-bottom: 30px;
-        }
-
-        .heart {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff8a80, #ffcc80);
-            transform: translate(-50%, -50%);
-            border-radius: 50%; /* دایره اولیه */
-        }
-
-        .heart::before,
-        .heart::after {
-            content: "";
-            position: absolute;
-            top: 0%;
-            width: 100%;
-            height: 100%;
-            background: inherit;
-            border-radius: 50%; /* دایره برای ایجاد قلب */
-        }
-
-        .heart::before {
-            left: -50%;
-            transform: rotate(-45deg); /* چرخش برای نیمه چپ قلب */
-        }
-
-        .heart::after {
-            left: 50%;
-            transform: rotate(45deg); /* چرخش برای نیمه راست قلب */
-        }
-
-
-        .heart-face {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.1em;
-            text-align: center;
-            padding: 20px;
-            line-height: 1.5;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            /* حذف جلوه سه بعدی برای تست */
-            background: transparent; /* پس زمینه شفاف */
-            box-shadow: none; /* حذف سایه */
-            border-radius: 0; /* حذف گردی گوشه */
-            clip-path: path('M0 100 V 0 C 50 0, 50 0, 100 0 V 100 Z'); /* برای برش متن به شکل قلب */
-        }
-
 
         #elapsed-time {
-            font-size: 1.3em;
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-            letter-spacing: 1px;
+            font-size: 1.2em; /* اندازه متن زمان */
+            font-weight: bold; /* پررنگ کردن متن زمان */
+            display: block; /* برای خط جدید رفتن */
+            margin-top: 5px; /* فاصله از متن بالا */
         }
     </style>
 </head>
@@ -108,15 +40,11 @@
 
     <h1>Aram and Mahyar</h1>
 
-    <div class="heart-container">
-        <div class="heart"></div>
-        <div class="heart-face">
-            دقیقا
-            <span id="elapsed-time"></span>
-            که به هم رسیدیم
-        </div>
+    <div class="heart-frame">
+        دقیقا
+        <span id="elapsed-time"></span>
+        که به هم رسیدیم
     </div>
-
 
     <script>
         function calculateElapsedTime() {
@@ -144,7 +72,6 @@
         }
 
         calculateElapsedTime();
-
         setInterval(calculateElapsedTime, 1000);
     </script>
 
