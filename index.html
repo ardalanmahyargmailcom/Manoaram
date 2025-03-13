@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aram and Mahyar</title>
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif; /* فونت فارسی زیبا */
+            background-color: #ffe0b2; /* پس زمینه گرم و ملایم */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: #795548; /* رنگ متن قهوه ای تیره */
+        }
+
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff2') format('woff2'),
+                 url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15); /* سایه متن برای عنوان */
+            color: #e65100; /* رنگ نارنجی تیره برای عنوان */
+        }
+
+        .heart-3d-container {
+            perspective: 800px; /* عمق دید برای جلوه سه بعدی */
+            margin-bottom: 30px;
+        }
+
+        .heart-3d-frame {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d; /* برای ایجاد فضای سه بعدی */
+            animation: rotateHeart 20s linear infinite; /* چرخش آرام قلب */
+        }
+
+        @keyframes rotateHeart {
+            0% { transform: rotateY(0deg) rotateZ(0deg); }
+            100% { transform: rotateY(360deg) rotateZ(360deg); }
+        }
+
+        .heart-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff8a80, #ffcc80); /* گرادیان رنگی گرم */
+            border-radius: 50%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3); /* سایه برای برجستگی */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1em;
+            text-align: center;
+            padding: 20px;
+            line-height: 1.5;
+            color: white; /* رنگ متن داخل قلب */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* سایه متن داخل قلب */
+            backface-visibility: hidden; /* مخفی کردن پشت وجه در چرخش */
+        }
+
+        .heart-face::before,
+        .heart-face::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit; /* استفاده از گرادیان رنگی مشابه */
+        }
+
+        .heart-face::before {
+            transform: translateX(-50%) rotateY(90deg); /* وجه کناری سمت چپ */
+        }
+
+        .heart-face::after {
+            transform: translateX(50%) rotateY(-90deg); /* وجه کناری سمت راست */
+        }
+
+        #elapsed-time {
+            font-size: 1.3em;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            letter-spacing: 1px; /* فاصله بین حروف */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Aram and Mahyar</h1>
+
+    <div class="heart-3d-container">
+        <div class="heart-3d-frame">
+            <div class="heart-face">
+                دقیقا
+                <span id="elapsed-time"></span>
+                که به هم رسیدیم
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function calculateElapsedTime() {
+            const startDate = new Date('2024-08-18T11:17:00'); // تاریخ و ساعت شروع رابطه (27 مرداد 1403 ساعت 11:17)
+            const now = new Date();
+
+            const differenceInSeconds = Math.floor((now - startDate) / 1000);
+            if (differenceInSeconds < 0) { // برای جلوگیری از منفی شدن زمان در صورت تنظیم اشتباه تاریخ
+                document.getElementById('elapsed-time').innerText = "هنوز نرسیده!";
+                return;
+            }
+
+            const days = Math.floor(differenceInSeconds / (24 * 3600));
+            const hours = Math.floor((differenceInSeconds % (24 * 3600)) / 3600);
+            const minutes = Math.floor((differenceInSeconds % 3600) / 60);
+            const seconds = Math.floor(differenceInSeconds % 60);
+
+            let timeString = "";
+            if (days > 0) {
+                timeString += days + " روز و ";
+            }
+            timeString += hours + " ساعت و " + minutes + " دقیقه و " + seconds + " ثانیه";
+
+            document.getElementById('elapsed-time').innerText = timeString;
+        }
+
+        calculateElapsedTime(); // اجرای اولیه
+
+        setInterval(calculateElapsedTime, 1000); // به‌روزرسانی هر ثانیه
+    </script>
+
+</body>
+</html>
