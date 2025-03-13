@@ -16,7 +16,8 @@
             flex-direction: column;
             color: #c2185b;
             background: linear-gradient(to bottom, #fde9ea 0%, #fce4ec 100%);
-            overflow: hidden; /* مخفی کردن قلب های شناور بیرون از صفحه */
+            overflow-x: hidden; /* برای جلوگیری از اسکرول افقی در انیمیشن باران */
+            position: relative; /* برای قرار دادن باران عشق به صورت مطلق */
         }
 
         @font-face {
@@ -37,11 +38,19 @@
 
         h1 {
             margin-bottom: 30px;
-            font-size: 3em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 4em; /* اندازه بزرگتر عنوان */
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25); /* سایه بیشتر برای عنوان */
             color: #e91e63;
-            position: relative; /* برای خط جداکننده زیر عنوان */
+            position: relative;
+            font-family: 'Dancing Script', cursive; /* فونت انگلیسی زیباتر برای عنوان */
+            font-weight: bold; /* ضخیم تر کردن فونت عنوان */
         }
+
+        @font-face {
+            font-family: 'Dancing Script';
+            src: url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+        }
+
 
         h1::after {
             content: '';
@@ -66,8 +75,8 @@
                         -6px -6px 12px rgba(255,255,255,0.6);
             transform-style: preserve-3d;
             border: 3px dashed #f06292;
-            position: relative; /* برای قرار دادن قلب های شناور داخل دایره */
-            overflow: hidden; /* مخفی کردن قلب های شناور بیرون از دایره */
+            position: relative;
+            overflow: hidden;
         }
 
         #elapsed-time {
@@ -79,134 +88,118 @@
             letter-spacing: 1.5px;
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-            position: relative; /* برای اینکه متن روی قلب های شناور قرار بگیره */
-            z-index: 10; /* برای اینکه متن روی قلب های شناور قرار بگیره */
+            position: relative;
+            z-index: 10;
         }
 
         .days-together-text {
             font-size: 1.2em;
             margin-bottom: 5px;
-            position: relative; /* برای اینکه متن روی قلب های شناور قرار بگیره */
-            z-index: 10; /* برای اینکه متن روی قلب های شناور قرار بگیره */
+            position: relative;
+            z-index: 10;
         }
 
-        /* استایل قلب های شناور */
-        .floating-heart {
+        /* استایل باران عشق */
+        .love-rain-container {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #ffdde1; /* رنگ قلب های شناور */
-            clip-path: path('M0 100 V 0 C 50 0, 50 0, 100 0 V 100 Z');
-            animation: floatHeart 15s linear infinite; /* انیمیشن شناور شدن */
-            opacity: 0.6; /* شفافیت قلب ها */
-            z-index: 1; /* زیر متن دایره */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none; /* برای اینکه باران روی عناصر دیگه تاثیر نذاره */
+            z-index: -1; /* قرارگیری پشت همه عناصر */
         }
 
-        /* انیمیشن شناور شدن قلب */
-        @keyframes floatHeart {
+        .love-rain-text {
+            position: absolute;
+            color: #f8bbd0; /* رنگ باران عشق (صورتی روشن تر) */
+            font-size: 1.5em;
+            font-family: 'Dancing Script', cursive; /* فونت مشابه عنوان */
+            font-weight: bold;
+            white-space: nowrap; /* جلوگیری از شکستن متن به خطوط */
+            opacity: 0; /* شروع با شفافیت صفر */
+            animation: loveRainFall 20s linear infinite; /* انیمیشن باران */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* سایه ملایم برای متن باران */
+        }
+
+
+        @keyframes loveRainFall {
             0% {
-                transform: translateY(100vh) translateX(-20vw) rotate(0deg);
+                top: -10%;
                 opacity: 0;
             }
             10% {
-                opacity: 0.8;
+                opacity: 0.7;
             }
-            80% {
-                opacity: 0.8;
+            90% {
+                opacity: 0.7;
             }
             100% {
-                transform: translateY(-10vh) translateX(120vw) rotate(360deg);
+                top: 110%;
                 opacity: 0;
             }
         }
 
-        /* استایل های مختلف برای قلب های شناور (اندازه، سرعت، تاخیر) */
-        .floating-heart:nth-child(1) {
-            width: 15px;
-            height: 15px;
-            animation-duration: 12s;
-            left: 10%;
-            top: 40%;
-        }
-
-        .floating-heart:nth-child(2) {
-            width: 25px;
-            height: 25px;
-            animation-duration: 20s;
-            left: 30%;
-            top: 60%;
-            animation-delay: 2s;
-        }
-
-        .floating-heart:nth-child(3) {
-            width: 18px;
-            height: 18px;
-            animation-duration: 16s;
-            left: 50%;
-            top: 20%;
-            animation-delay: 4s;
-        }
-
-        .floating-heart:nth-child(4) {
-            width: 22px;
-            height: 22px;
-            animation-duration: 18s;
-            left: 70%;
-            top: 80%;
-            animation-delay: 1s;
-        }
-
-        .floating-heart:nth-child(5) {
-            width: 20px;
-            height: 20px;
-            animation-duration: 14s;
-            left: 90%;
-            top: 50%;
-            animation-delay: 3s;
-        }
-         .floating-heart:nth-child(6) {
-            width: 16px;
-            height: 16px;
-            animation-duration: 13s;
-            left: 20%;
-            top: 10%;
-            animation-delay: 5s;
-        }
-
-        .floating-heart:nth-child(7) {
-            width: 24px;
-            height: 24px;
-            animation-duration: 19s;
-            left: 40%;
-            top: 90%;
-            animation-delay: 0s;
-        }
-
-        .floating-heart:nth-child(8) {
-            width: 19px;
-            height: 19px;
-            animation-duration: 17s;
-            left: 60%;
-            top: 30%;
-            animation-delay: 2.5s;
-        }
-
-        .floating-heart:nth-child(9) {
-            width: 21px;
-            height: 21px;
-            animation-duration: 15s;
-            left: 80%;
-            top: 70%;
-            animation-delay: 3.5s;
-        }
-
-        .floating-heart:nth-child(10) {
-            width: 17px;
-            height: 17px;
-            animation-duration: 11s;
+        /* استایل های مختلف برای باران عشق (موقعیت، تاخیر، سرعت) */
+        .love-rain-text:nth-child(1) {
             left: 5%;
-            top: 85%;
+            animation-delay: 0s;
+            animation-duration: 17s;
+        }
+
+        .love-rain-text:nth-child(2) {
+            left: 15%;
+            animation-delay: 2s;
+            animation-duration: 22s;
+        }
+
+        .love-rain-text:nth-child(3) {
+            left: 25%;
+            animation-delay: 4s;
+            animation-duration: 19s;
+        }
+
+        .love-rain-text:nth-child(4) {
+            left: 35%;
+            animation-delay: 1s;
+            animation-duration: 25s;
+        }
+
+        .love-rain-text:nth-child(5) {
+            left: 45%;
+            animation-delay: 3s;
+            animation-duration: 18s;
+        }
+
+        .love-rain-text:nth-child(6) {
+            left: 55%;
+            animation-delay: 5s;
+            animation-duration: 21s;
+        }
+
+        .love-rain-text:nth-child(7) {
+            left: 65%;
+            animation-delay: 0.5s;
+            animation-duration: 23s;
+        }
+
+        .love-rain-text:nth-child(8) {
+            left: 75%;
+            animation-delay: 2.5s;
+            animation-duration: 20s;
+        }
+
+        .love-rain-text:nth-child(9) {
+            left: 85%;
+            animation-delay: 4.5s;
+            animation-duration: 24s;
+        }
+
+        .love-rain-text:nth-child(10) {
+            left: 95%;
             animation-delay: 1.5s;
+            animation-duration: 16s;
         }
 
 
@@ -214,22 +207,24 @@
 </head>
 <body>
 
-    <h1>Aram and Mahyar</h1>
+    <div class="love-rain-container">
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+    </div>
 
+    <h1>Aram and Mahyar</h1>
     <div class="circle-frame">
         <div class="days-together-text">دقیقا</div>
         <span id="elapsed-time"></span>
         <div>که به هم رسیدیم</div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
     </div>
 
     <script>
