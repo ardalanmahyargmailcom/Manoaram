@@ -17,11 +17,11 @@
             color: #e91e63; /* رنگ متن عاشقانه */
         }
 
-        .heart-frame {
-            width: 200px; /* اندازه قاب */
-            height: 200px; /* اندازه قاب */
-            background-color: #ffdde1; /* رنگ پس زمینه قلب */
-            clip-path: path('M0 100 V 0 C 50 0, 50 0, 100 0 V 100 Z'); /* شکل قلب */
+        .circle-frame {
+            width: 200px; /* اندازه دایره */
+            height: 200px; /* اندازه دایره */
+            background-color: #ffdde1; /* رنگ پس زمینه دایره */
+            border-radius: 50%; /* دایره کامل */
             display: flex; /* برای مرکز قرار دادن متن */
             justify-content: center; /* برای مرکز قرار دادن متن */
             align-items: center; /* برای مرکز قرار دادن متن */
@@ -40,7 +40,7 @@
 
     <h1>Aram and Mahyar</h1>
 
-    <div class="heart-frame">
+    <div class="circle-frame">
         دقیقا
         <span id="elapsed-time"></span>
         که به هم رسیدیم
