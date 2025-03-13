@@ -6,17 +6,17 @@
     <title>Aram and Mahyar</title>
     <style>
         body {
-            font-family: 'Nastaliq', sans-serif; /* فونت نستعلیق برای زیبایی بیشتر */
-            background-color: #fde9ea; /* پس زمینه صورتی خیلی ملایم */
+            font-family: 'Nastaliq', sans-serif;
+            background-color: #fde9ea;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             flex-direction: column;
-            color: #c2185b; /* رنگ متن زرشکی تیره */
-            /* اضافه کردن گرادیان پس زمینه ملایم */
+            color: #c2185b;
             background: linear-gradient(to bottom, #fde9ea 0%, #fce4ec 100%);
+            overflow: hidden; /* مخفی کردن قلب های شناور بیرون از صفحه */
         }
 
         @font-face {
@@ -27,46 +27,22 @@
             font-style: normal;
         }
 
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff2') format('woff2'),
+                 url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         h1 {
             margin-bottom: 30px;
-            font-size: 3em; /* اندازه بزرگتر عنوان */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* سایه بیشتر برای عنوان */
-            color: #e91e63; /* رنگ صورتی پررنگ تر برای عنوان */
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            color: #e91e63;
+            position: relative; /* برای خط جداکننده زیر عنوان */
         }
 
-        .circle-frame {
-            width: 320px; /* اندازه بزرگتر دایره */
-            height: 320px; /* اندازه بزرگتر دایره */
-            background: linear-gradient(135deg, #f48fb1, #fbc0cd); /* گرادیان صورتی ملایم تر */
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 12px 12px 25px rgba(0,0,0,0.25),
-                        -6px -6px 12px rgba(255,255,255,0.6);
-            transform-style: preserve-3d;
-            /* اضافه کردن حاشیه نقطه چین تزئینی */
-            border: 3px dashed #f06292;
-        }
-
-        #elapsed-time {
-            font-family: 'Vazirmatn', cursive; /* فونت فانتزی برای زمان */
-            font-size: 1.6em; /* اندازه بزرگتر متن زمان */
-            font-weight: bold;
-            display: block;
-            margin-top: 15px; /* فاصله بیشتر از متن بالا */
-            letter-spacing: 1.5px; /* فاصله بیشتر بین حروف */
-            color: #fff; /* رنگ سفید برای متن زمان */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* سایه بیشتر برای متن زمان */
-        }
-
-        .days-together-text {
-            font-size: 1.2em; /* اندازه متن "دقیقا ... که به هم رسیدیم" */
-            margin-bottom: 5px; /* فاصله از متن پایین */
-        }
-
-        /* خط جداکننده تزئینی زیر عنوان */
         h1::after {
             content: '';
             display: block;
@@ -76,15 +52,184 @@
             margin: 15px auto 0;
             border-radius: 2px;
         }
+
+        .circle-frame {
+            width: 320px;
+            height: 320px;
+            background: linear-gradient(135deg, #f48fb1, #fbc0cd);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 12px 12px 25px rgba(0,0,0,0.25),
+                        -6px -6px 12px rgba(255,255,255,0.6);
+            transform-style: preserve-3d;
+            border: 3px dashed #f06292;
+            position: relative; /* برای قرار دادن قلب های شناور داخل دایره */
+            overflow: hidden; /* مخفی کردن قلب های شناور بیرون از دایره */
+        }
+
+        #elapsed-time {
+            font-family: 'Vazirmatn', cursive;
+            font-size: 1.6em;
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            letter-spacing: 1.5px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            position: relative; /* برای اینکه متن روی قلب های شناور قرار بگیره */
+            z-index: 10; /* برای اینکه متن روی قلب های شناور قرار بگیره */
+        }
+
+        .days-together-text {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            position: relative; /* برای اینکه متن روی قلب های شناور قرار بگیره */
+            z-index: 10; /* برای اینکه متن روی قلب های شناور قرار بگیره */
+        }
+
+        /* استایل قلب های شناور */
+        .floating-heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ffdde1; /* رنگ قلب های شناور */
+            clip-path: path('M0 100 V 0 C 50 0, 50 0, 100 0 V 100 Z');
+            animation: floatHeart 15s linear infinite; /* انیمیشن شناور شدن */
+            opacity: 0.6; /* شفافیت قلب ها */
+            z-index: 1; /* زیر متن دایره */
+        }
+
+        /* انیمیشن شناور شدن قلب */
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) translateX(-20vw) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            80% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(120vw) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* استایل های مختلف برای قلب های شناور (اندازه، سرعت، تاخیر) */
+        .floating-heart:nth-child(1) {
+            width: 15px;
+            height: 15px;
+            animation-duration: 12s;
+            left: 10%;
+            top: 40%;
+        }
+
+        .floating-heart:nth-child(2) {
+            width: 25px;
+            height: 25px;
+            animation-duration: 20s;
+            left: 30%;
+            top: 60%;
+            animation-delay: 2s;
+        }
+
+        .floating-heart:nth-child(3) {
+            width: 18px;
+            height: 18px;
+            animation-duration: 16s;
+            left: 50%;
+            top: 20%;
+            animation-delay: 4s;
+        }
+
+        .floating-heart:nth-child(4) {
+            width: 22px;
+            height: 22px;
+            animation-duration: 18s;
+            left: 70%;
+            top: 80%;
+            animation-delay: 1s;
+        }
+
+        .floating-heart:nth-child(5) {
+            width: 20px;
+            height: 20px;
+            animation-duration: 14s;
+            left: 90%;
+            top: 50%;
+            animation-delay: 3s;
+        }
+         .floating-heart:nth-child(6) {
+            width: 16px;
+            height: 16px;
+            animation-duration: 13s;
+            left: 20%;
+            top: 10%;
+            animation-delay: 5s;
+        }
+
+        .floating-heart:nth-child(7) {
+            width: 24px;
+            height: 24px;
+            animation-duration: 19s;
+            left: 40%;
+            top: 90%;
+            animation-delay: 0s;
+        }
+
+        .floating-heart:nth-child(8) {
+            width: 19px;
+            height: 19px;
+            animation-duration: 17s;
+            left: 60%;
+            top: 30%;
+            animation-delay: 2.5s;
+        }
+
+        .floating-heart:nth-child(9) {
+            width: 21px;
+            height: 21px;
+            animation-duration: 15s;
+            left: 80%;
+            top: 70%;
+            animation-delay: 3.5s;
+        }
+
+        .floating-heart:nth-child(10) {
+            width: 17px;
+            height: 17px;
+            animation-duration: 11s;
+            left: 5%;
+            top: 85%;
+            animation-delay: 1.5s;
+        }
+
+
     </style>
 </head>
 <body>
 
     <h1>Aram and Mahyar</h1>
+
     <div class="circle-frame">
         <div class="days-together-text">دقیقا</div>
         <span id="elapsed-time"></span>
         <div>که به هم رسیدیم</div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
     </div>
 
     <script>
