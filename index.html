@@ -244,7 +244,6 @@
             justify-content: center; /* Center fountain items horizontally */
             align-items: flex-end; /* Align fountain items to the bottom */
             z-index: 100; /*  نمایش فواره روی دکمه و سایر عناصر */
-            height: 0; /*  ارتفاع اولیه صفر برای فواره */
         }
 
         .fountain-text {
@@ -310,6 +309,7 @@
                 fountainText.innerText = 'For Ever';
                 fountainContainer.appendChild(fountainText);
 
+                // حذف متن فواره بعد از اتمام انیمیشن
                 fountainText.addEventListener('animationend', function() {
                     fountainText.remove();
                 });
