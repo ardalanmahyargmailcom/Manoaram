@@ -44,6 +44,8 @@
             position: relative;
             font-family: 'Dancing Script', cursive; /* فونت انگلیسی زیباتر برای عنوان */
             font-weight: bold; /* ضخیم تر کردن فونت عنوان */
+            direction: ltr; /*  اضافه شده: جهت عنوان به چپ به راست */
+            unicode-bidi: isolate; /* اضافه شده: جداسازی برای حل مشکل نمایش */
         }
 
         @font-face {
@@ -119,7 +121,7 @@
             font-weight: bold;
             white-space: nowrap; /* جلوگیری از شکستن متن به خطوط */
             opacity: 0; /* شروع با شفافیت صفر */
-            animation: loveRainFall 20s linear infinite; /* انیمیشن باران */
+            animation: loveRainFall 10s linear infinite; /*  تغییر داده شده: سرعت باران بیشتر */
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* سایه ملایم برای متن باران */
         }
 
@@ -145,61 +147,61 @@
         .love-rain-text:nth-child(1) {
             left: 5%;
             animation-delay: 0s;
-            animation-duration: 17s;
+            animation-duration: 8.5s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
         .love-rain-text:nth-child(2) {
             left: 15%;
             animation-delay: 2s;
-            animation-duration: 22s;
+            animation-duration: 11s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
         .love-rain-text:nth-child(3) {
             left: 25%;
             animation-delay: 4s;
-            animation-duration: 19s;
+            animation-duration: 9.5s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
         .love-rain-text:nth-child(4) {
             left: 35%;
             animation-delay: 1s;
-            animation-duration: 25s;
+            animation-duration: 12.5s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
         .love-rain-text:nth-child(5) {
             left: 45%;
             animation-delay: 3s;
-            animation-duration: 18s;
+            animation-duration: 9s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
         .love-rain-text:nth-child(6) {
             left: 55%;
             animation-delay: 5s;
-            animation-duration: 21s;
+            animation-duration: 10.5s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
         .love-rain-text:nth-child(7) {
             left: 65%;
             animation-delay: 0.5s;
-            animation-duration: 23s;
+            animation-duration: 11.5s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
         .love-rain-text:nth-child(8) {
             left: 75%;
             animation-delay: 2.5s;
-            animation-duration: 20s;
+            animation-duration: 10s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
         .love-rain-text:nth-child(9) {
             left: 85%;
             animation-delay: 4.5s;
-            animation-duration: 24s;
+            animation-duration: 12s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
         .love-rain-text:nth-child(10) {
             left: 95%;
             animation-delay: 1.5s;
-            animation-duration: 16s;
+            animation-duration: 8s; /* تغییر داده شده: سرعت باران بیشتر */
         }
 
 
