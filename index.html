@@ -6,7 +6,7 @@
     <title>Aram and Mahyar</title>
     <style>
         body {
-            font-family: Arial, sans-serif; /* فونت ساده */
+            font-family: 'Vazirmatn', sans-serif; /* فونت فارسی زیبا */
             background-color: #fce4ec; /* پس زمینه صورتی ملایم */
             display: flex;
             justify-content: center;
@@ -14,25 +14,48 @@
             min-height: 100vh;
             margin: 0;
             flex-direction: column;
-            color: #e91e63; /* رنگ متن عاشقانه */
+            color: #795548; /* رنگ متن قهوه ای تیره */
+        }
+
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff2') format('woff2'),
+                 url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+            color: #e65100;
         }
 
         .circle-frame {
-            width: 200px; /* اندازه دایره */
-            height: 200px; /* اندازه دایره */
-            background-color: #ffdde1; /* رنگ پس زمینه دایره */
-            border-radius: 50%; /* دایره کامل */
-            display: flex; /* برای مرکز قرار دادن متن */
-            justify-content: center; /* برای مرکز قرار دادن متن */
-            align-items: center; /* برای مرکز قرار دادن متن */
-            text-align: center; /* برای مرکز قرار دادن متن */
+            width: 300px; /* اندازه بزرگتر دایره */
+            height: 300px; /* اندازه بزرگتر دایره */
+            background: linear-gradient(135deg, #ffb347, #ffcc80); /* گرادیان رنگی خوشرنگ تر */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.2), /* سایه برای عمق و برجستگی */
+                        -5px -5px 10px rgba(255,255,255,0.5); /* سایه روشن برای جلوه سه بعدی */
+            transform-style: preserve-3d; /* برای جلوه سه بعدی */
         }
 
+
         #elapsed-time {
-            font-size: 1.2em; /* اندازه متن زمان */
-            font-weight: bold; /* پررنگ کردن متن زمان */
-            display: block; /* برای خط جدید رفتن */
-            margin-top: 5px; /* فاصله از متن بالا */
+            font-family: 'Vazirmatn', cursive; /* فونت زیباتر برای متن زمان */
+            font-size: 1.5em; /* اندازه بزرگتر متن زمان */
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            color: #fff; /* رنگ سفید برای متن زمان */
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); /* سایه متن برای برجسته شدن */
         }
     </style>
 </head>
