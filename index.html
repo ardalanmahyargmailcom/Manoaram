@@ -6,15 +6,15 @@
     <title>Aram and Mahyar</title>
     <style>
         body {
-            font-family: 'Vazirmatn', sans-serif; /* فونت فارسی زیبا */
-            background-color: #ffe0b2; /* پس زمینه گرم و ملایم */
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #ffe0b2;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             flex-direction: column;
-            color: #795548; /* رنگ متن قهوه ای تیره */
+            color: #795548;
         }
 
         @font-face {
@@ -28,31 +28,56 @@
         h1 {
             margin-bottom: 30px;
             font-size: 2.5em;
-            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15); /* سایه متن برای عنوان */
-            color: #e65100; /* رنگ نارنجی تیره برای عنوان */
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+            color: #e65100;
         }
 
-        .heart-3d-container {
-            perspective: 800px; /* عمق دید برای جلوه سه بعدی */
+        .heart-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
             margin-bottom: 30px;
         }
 
-        .heart-3d-frame {
-            width: 250px; /* اندازه بزرگتر برای قلب */
-            height: 250px; /* اندازه بزرگتر برای قلب */
-            position: relative;
-            transform-style: preserve-3d; /* برای ایجاد فضای سه بعدی */
-            clip-path: path('M0 100 V 0 C 50 0, 50 0, 100 0 V 100 Z'); /* شکل قلب */
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff8a80, #ffcc80);
+            transform: translate(-50%, -50%);
+            border-radius: 50%; /* دایره اولیه */
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            top: 0%;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: 50%; /* دایره برای ایجاد قلب */
+        }
+
+        .heart::before {
+            left: -50%;
+            transform: rotate(-45deg); /* چرخش برای نیمه چپ قلب */
+        }
+
+        .heart::after {
+            left: 50%;
+            transform: rotate(45deg); /* چرخش برای نیمه راست قلب */
         }
 
 
         .heart-face {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #ff8a80, #ffcc80); /* گرادیان رنگی گرم */
-            border-radius: 10px; /* گرد کردن گوشه های قلب */
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3); /* سایه برای برجستگی */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -60,35 +85,22 @@
             text-align: center;
             padding: 20px;
             line-height: 1.5;
-            color: white; /* رنگ متن داخل قلب */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* سایه متن داخل قلب */
-            backface-visibility: hidden; /* مخفی کردن پشت وجه */
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            /* حذف جلوه سه بعدی برای تست */
+            background: transparent; /* پس زمینه شفاف */
+            box-shadow: none; /* حذف سایه */
+            border-radius: 0; /* حذف گردی گوشه */
+            clip-path: path('M0 100 V 0 C 50 0, 50 0, 100 0 V 100 Z'); /* برای برش متن به شکل قلب */
         }
 
-        .heart-face::before,
-        .heart-face::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            clip-path: inherit; /* استفاده از شکل قلب برای وجه های کناری */
-            background: inherit; /* استفاده از گرادیان رنگی مشابه */
-        }
-
-        .heart-face::before {
-            transform: translateX(-50%) rotateY(90deg); /* وجه کناری سمت چپ */
-        }
-
-        .heart-face::after {
-            transform: translateX(50%) rotateY(-90deg); /* وجه کناری سمت راست */
-        }
 
         #elapsed-time {
             font-size: 1.3em;
             font-weight: bold;
             display: block;
             margin-top: 10px;
-            letter-spacing: 1px; /* فاصله بین حروف */
+            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -96,24 +108,23 @@
 
     <h1>Aram and Mahyar</h1>
 
-    <div class="heart-3d-container">
-        <div class="heart-3d-frame">
-            <div class="heart-face">
-                دقیقا
-                <span id="elapsed-time"></span>
-                که به هم رسیدیم
-            </div>
+    <div class="heart-container">
+        <div class="heart"></div>
+        <div class="heart-face">
+            دقیقا
+            <span id="elapsed-time"></span>
+            که به هم رسیدیم
         </div>
     </div>
 
 
     <script>
         function calculateElapsedTime() {
-            const startDate = new Date('2024-08-18T11:17:00'); // تاریخ و ساعت شروع رابطه (27 مرداد 1403 ساعت 11:17)
+            const startDate = new Date('2024-08-18T11:17:00');
             const now = new Date();
 
             const differenceInSeconds = Math.floor((now - startDate) / 1000);
-            if (differenceInSeconds < 0) { // برای جلوگیری از منفی شدن زمان در صورت تنظیم اشتباه تاریخ
+            if (differenceInSeconds < 0) {
                 document.getElementById('elapsed-time').innerText = "هنوز نرسیده!";
                 return;
             }
@@ -132,9 +143,9 @@
             document.getElementById('elapsed-time').innerText = timeString;
         }
 
-        calculateElapsedTime(); // اجرای اولیه
+        calculateElapsedTime();
 
-        setInterval(calculateElapsedTime, 1000); // به‌روزرسانی هر ثانیه
+        setInterval(calculateElapsedTime, 1000);
     </script>
 
 </body>
