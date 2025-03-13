@@ -215,4 +215,143 @@
             padding: 15px 30px;
             border-radius: 35px;
             box-shadow: 8px 8px 15px rgba(0,0,0,0.2),
-                        -4px -
+                        -4px -4px 8px rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .forever-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 12px 12px 25px rgba(0,0,0,0.25),
+                        -6px -6px 12px rgba(255,255,255,0.6);
+        }
+
+        .forever-button:active {
+            transform: translateY(0);
+            box-shadow: 6px 6px 10px rgba(0,0,0,0.2),
+                        -2px -2px 4px rgba(255,255,255,0.5);
+        }
+
+        .fountain-container {
+            position: absolute;
+            bottom: 0; /*  موقعیت فواره زیر دکمه */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            display: flex;
+            justify-content: center; /* Center fountain items horizontally */
+            align-items: flex-end; /* Align fountain items to the bottom */
+            z-index: 100; /*  نمایش فواره روی دکمه و سایر عناصر */
+            height: 0; /*  ارتفاع اولیه صفر برای فواره */
+        }
+
+
+        .fountain-text {
+            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            color: #f06292;
+            white-space: nowrap;
+            opacity: 0; /*  تغییر داده شده: شروع با opacity: 0 برای تست */
+            animation: textFountain 1.5s ease-out forwards; /*  انیمیشن فواره */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes textFountain {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.5); /*  شروع از پایین و کوچک */
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px) scale(1.5); /*  حرکت به بالا و بزرگ شدن */
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="love-rain-container">
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+    </div>
+
+    <h1>Aram and Mahyar</h1>
+    <div class="circle-frame">
+        <div class="days-together-text">دقیقا</div>
+        <span id="elapsed-time"></span>
+        <div>که به هم رسیدیم</div>
+    </div>
+
+    <button class="forever-button" id="foreverButton">For Ever</button>
+
+    <div class="fountain-container" id="fountainContainer">
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() { //  اضافه شده:  DOMContentLoaded
+            const foreverButton = document.getElementById('foreverButton');
+            const fountainContainer = document.getElementById('fountainContainer');
+
+            foreverButton.addEventListener('click', function() {
+                console.log('Button clicked!'); //  اضافه شده: console.log برای تست
+
+                const fountainText = document.createElement('div');
+                fountainText.classList.add('fountain-text');
+                fountainText.innerText = 'For Ever';
+                fountainContainer.appendChild(fountainText);
+
+                //  حذف متن فواره بعد از اتمام انیمیشن
+                fountainText.addEventListener('animationend', function() {
+                    fountainText.remove();
+                });
+            });
+        });
+
+        function calculateElapsedTime() {
+            const startDate = new Date('2024-08-18T11:17:00');
+            const now = new Date();
+
+            const differenceInSeconds = Math.floor((now - startDate) / 1000);
+            if (differenceInSeconds < 0) {
+                document.getElementById('elapsed-time').innerText = "هنوز نرسیده!";
+                return;
+            }
+
+            const days = Math.floor(differenceInSeconds / (24 * 3600));
+            const hours = Math.floor((differenceInSeconds % (24 * 3600)) / 3600);
+            const minutes = Math.floor((differenceInSeconds % 3600) / 60);
+            const seconds = Math.floor(differenceInSeconds % 60);
+
+            let timeString = "";
+            if (days > 0) {
+                timeString += days + " روز و ";
+            }
+            timeString += hours + " ساعت و " + minutes + " دقیقه و " + seconds + " ثانیه";
+
+            document.getElementById('elapsed-time').innerText = timeString;
+        }
+
+        calculateElapsedTime();
+        setInterval(calculateElapsedTime, 1000);
+
+
+    </script>
+
+</body>
+</html>
