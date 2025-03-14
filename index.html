@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aram and Mahyar</title>
+    <style>
+        body {
+            font-family: 'Nastaliq', sans-serif;
+            background-color: #f8f0e3;
+            background: linear-gradient(to bottom, #f8f0e3 0%, #fefae0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: #6a994e;
+            overflow-x: hidden;
+            position: relative;
+            text-align: center;
+        }
+
+        @font-face {
+            font-family: 'Nastaliq';
+            src: url('https://cdn.fontcdn.ir/Font/Nastaliq/IranNastaliq.woff2') format('woff2'),
+                 url('https://cdn.fontcdn.ir/Font/Nastaliq/IranNastaliq.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff2') format('woff2'),
+                 url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 4em;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+            color: #a7c957;
+            position: relative;
+            font-family: 'Amatic SC', cursive;
+            font-weight: bold;
+            direction: ltr;
+            unicode-bidi: isolate;
+            text-align: center;
+        }
+
+        @font-face {
+            font-family: 'Amatic SC';
+            src: url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+        }
+
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 3px;
+            background-color: #a7c957;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .circle-frame {
+            width: 320px;
+            height: 320px;
+            background: linear-gradient(135deg, #a7c957, #c8e6c9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 8px 8px 15px rgba(0,0,0,0.15),
+                        -4px -4px 8px rgba(255,255,255,0.7);
+            transform-style: preserve-3d;
+            border: 3px dashed #a7c957;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #elapsed-time {
+            font-family: 'Vazirmatn', cursive;
+            font-size: 1.6em;
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            letter-spacing: 1.5px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .days-together-text {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* استایل باران عشق */
+        .love-rain-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .love-rain-text {
+            position: absolute;
+            color: #c8e6c9;
+            font-size: 1.5em;
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            white-space: nowrap;
+            opacity: 0;
+            animation: loveRainFall 10s linear infinite;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+
+        @keyframes loveRainFall {
+            0% {
+                top: -10%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                top: 110%;
+                opacity: 0;
+            }
+        }
+
+        .love-rain-text:nth-child(1) {
+            left: 5%;
+            animation-delay: 0s;
+            animation-duration: 8.5s;
+        }
+
+        .love-rain-text:nth-child(2) {
+            left: 15%;
+            animation-delay: 2s;
+            animation-duration: 11s;
+        }
+
+        .love-rain-text:nth-child(3) {
+            left: 25%;
+            animation-delay: 4s;
+            animation-duration: 9.5s;
+        }
+
+        .love-rain-text:nth-child(4) {
+            left: 35%;
+            animation-delay: 1s;
+            animation-duration: 12.5s;
+        }
+
+        .love-rain-text:nth-child(5) {
+            left: 45%;
+            animation-delay: 3s;
+            animation-duration: 9s;
+        }
+
+        .love-rain-text:nth-child(6) {
+            left: 55%;
+            animation-delay: 5s;
+            animation-duration: 10.5s;
+        }
+
+        .love-rain-text:nth-child(7) {
+            left: 65%;
+            animation-delay: 0.5s;
+            animation-duration: 11.5s;
+        }
+
+        .love-rain-text:nth-child(8) {
+            left: 75%;
+            animation-delay: 2.5s;
+            animation-duration: 10s;
+        }
+
+        .love-rain-text:nth-child(9) {
+            left: 85%;
+            animation-delay: 4.5s;
+            animation-duration: 12s;
+        }
+
+        .love-rain-text:nth-child(10) {
+            left: 95%;
+            animation-delay: 1.5s;
+            animation-duration: 8s;
+        }
+
+        /* استایل "For Ever" دور دایره */
+        .forever-around-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .forever-text-part {
+            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.7em; /*  کمی کوچکتر از دکمه قبلی */
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /*  هاله */
+            -webkit-text-stroke: 1px #6a994e; /*  خط دور حروف برای خوانایی بیشتر */
+        }
+
+        .forever-text-for {
+            top: 10px; /*  تنظیم موقعیت "For" در بالا */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .forever-text-ever {
+            bottom: 10px; /*  تنظیم موقعیت "Ever" در پایین */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+
+        /* استایل های پنجره بازشو دلایل دوست داشتنت */
+        .reasons-popup-button {
+            margin-top: 30px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            background-color: #f06292;
+            color: white;
+            font-family: 'Vazirmatn', cursive;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .reasons-popup-button:hover {
+            background-color: #e91e63;
+            transform: scale(1.05);
+        }
+
+        .reasons-popup-button:active {
+            transform: scale(0.95);
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+
+        .reasons-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .reasons-modal-content {
+            background-color: #fefae0;
+            margin: 15% auto;
+            padding: 30px;
+            border: 2px solid #a7c957;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            position: relative;
+            text-align: center;
+        }
+
+        .reasons-modal-content h2 {
+            color: #e91e63;
+            font-family: 'Nastaliq', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .reasons-list-popup {
+            list-style: none;
+            padding: 0;
+        }
+
+        .reasons-list-popup li {
+            font-family: 'Vazirmatn', cursive;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #6a994e;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .reasons-list-popup li::before {
+            content: '♥';
+            color: #f06292;
+            display: inline-block;
+            width: 1em;
+            margin-left: 0;
+            margin-right: 0.5em;
+            text-shadow: none;
+        }
+
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="love-rain-container">
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+    </div>
+
+    <h1>Aram and Mahyar</h1>
+    <div class="circle-frame">
+        <div class="days-together-text">دقیقا</div>
+        <span id="elapsed-time"></span>
+        <div>که به هم رسیدیم</div>
+        <div class="forever-around-circle">
+            <span class="forever-text-part forever-text-for">For</span>
+            <span class="forever-text-part forever-text-ever">Ever</span>
+        </div>
+    </div>
+
+
+    <div class="fountain-container" id="fountainContainer">
+    </div>
+
+    <button id="reasonsPopupButton" class="reasons-popup-button">
+        چرا دوستت دارم؟ ❤️
+    </button>
+
+    <div id="reasonsModal" class="reasons-modal">
+        <div class="reasons-modal-content">
+            <span class="close-button" id="closeButton">&times;</span>
+            <h2>دلایل دوست داشتنم</h2>
+            <ul class="reasons-list-popup" id="reasonsListPopup">
+                <li>چونکه خوشگل تر از تو وجود نداره</li>
+                <li>چونکه بهترین دختر روی زمینی</li>
+                <li>چونکه آرام منی</li>
+                <li>چونکه قشنگترین خنده هارو داری</li>
+                <li>چونکه کسی نمیتونه جاتو بگیره</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+            function calculateElapsedTime() {
+                const startDate = new Date('2024-08-18T11:17:00');
+                const now = new Date();
+
+                const differenceInSeconds = Math.floor((now - startDate) / 1000);
+                if (differenceInSeconds < 0) {
+                    document.getElementById('elapsed-time').innerText = "هنوز نرسیده!";
+                    return;
+                }
+
+                const days = Math.floor(differenceInSeconds / (24 * 3600));
+                const hours = Math.floor((differenceInSeconds % (24 * 3600)) / 3600);
+                const minutes = Math.floor((differenceInSeconds % 3600) / 60);
+                const seconds = Math.floor(differenceInSeconds % 60);
+
+                let timeString = "";
+                if (days > 0) {
+                    timeString += days + " روز و ";
+                }
+                timeString += hours + " ساعت و " + minutes + " دقیقه و " + seconds + " ثانیه";
+
+                document.getElementById('elapsed-time').innerText = timeString;
+            }
+
+            calculateElapsedTime();
+            setInterval(calculateElapsedTime, 1000);
+
+            //  کد پنجره بازشو دلایل دوست داشتنت
+            const reasonsPopupButton = document.getElementById('reasonsPopupButton');
+            const reasonsModal = document.getElementById('reasonsModal');
+            const closeButton = document.getElementById('closeButton');
+
+            reasonsPopupButton.addEventListener('click', function() {
+                reasonsModal.style.display = "block"; //  نمایش پنجره بازشو
+            });
+
+            closeButton.addEventListener('click', function() {
+                reasonsModal.style.display = "none"; //  پنهان کردن پنجره بازشو
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == reasonsModal) {
+                    reasonsModal.style.display = "none"; //  بستن با کلیک بیرون پنجره بازشو
+                }
+            });
+
+
+        });
+
+
+    </script>
+
+</body>
+</html>
