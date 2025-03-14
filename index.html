@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aram and Mahyar</title>
+    <style>
+        body {
+            font-family: 'Nastaliq', sans-serif;
+            background-color: #f8f0e3;
+            background: linear-gradient(to bottom, #f8f0e3 0%, #fefae0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: #6a994e;
+            overflow-x: hidden;
+            position: relative;
+            text-align: center;
+            transition: background-color 0.5s ease;
+        }
+
+        @font-face {
+            font-family: 'Nastaliq';
+            src: url('https://cdn.fontcdn.ir/Font/Nastaliq/IranNastaliq.woff2') format('woff2'),
+                 url('https://cdn.fontcdn.ir/Font/Nastaliq/IranNastaliq.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff2') format('woff2'),
+                 url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Amatic SC';
+            src: url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+        }
+
+        /* فونت های جدید دست نویس و فانتزی */
+        @font-face {
+            font-family: 'Delicious Handrawn';
+            src: url('https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap');
+        }
+
+        @font-face {
+            font-family: 'Pinyon Script';
+            src: url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 4em;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+            color: #a7c957;
+            position: relative;
+            font-family: 'Pinyon Script', cursive;
+            font-weight: normal;
+            direction: ltr;
+            unicode-bidi: isolate;
+            text-align: center;
+            opacity: 0; /*  شروع با opacity صفر */
+            animation: fadeIn 0.5s ease-out 0.2s forwards; /* کاهش duration و delay */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1; /*  در پایان انیمیشن opacity یک شود */
+            }
+        }
+
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 3px;
+            background-color: #a7c957;
+            margin: 15px auto 0;
+            border-radius: 2px;
+            opacity: 0; /*  شروع با opacity صفر */
+            animation: fadeIn 0.5s ease-out 0.4s forwards; /* کاهش duration و delay */
+        }
+
+        .circle-frame {
+            width: 320px;
+            height: 320px;
+            background: linear-gradient(135deg, #a7c957, #c8e6c9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 8px 8px 15px rgba(0,0,0,0.15),
+                        -4px -4px 8px rgba(255,255,255,0.7);
+            transform-style: preserve-3d;
+            border: 3px dashed #a7c957;
+            position: relative;
+            overflow: hidden;
+            opacity: 0; /*  شروع با opacity صفر */
+            animation: fadeIn 0.5s ease-out 0.6s forwards; /* کاهش duration و delay */
+        }
+
+        #elapsed-time {
+            font-family: 'Vazirmatn', cursive;
+            font-size: 1.6em;
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            letter-spacing: 1.5px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+            opacity: 0; /*  شروع با opacity صفر */
+            animation: fadeIn 0.5s ease-out 0.8s forwards; /* کاهش duration و delay */
+        }
+
+        .days-together-text {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 10;
+            opacity: 0; /*  شروع با opacity صفر */
+            animation: fadeIn 0.5s ease-out 1s forwards; /* کاهش duration و delay */
+        }
+
+        /* استایل باران عشق */
+        .love-rain-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .love-rain-text {
+            position: absolute;
+            color: #c8e6c9;
+            font-size: 1.5em;
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            white-space: nowrap;
+            opacity: 0;
+            animation: loveRainFall 10s linear infinite, fadeIn 0.5s ease-in 1.2s forwards; /* کاهش duration و delay */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+
+        @keyframes loveRainFall {
+            0% {
+                top: -10%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                top: 110%;
+                opacity: 0;
+            }
+        }
+
+        .love-rain-text:nth-child(1) {
+            left: 5%;
+            animation-delay: 0s;
+            animation-duration: 8.5s;
+        }
+
+        .love-rain-text:nth-child(2) {
+            left: 15%;
+            animation-delay: 2s;
+            animation-duration: 11s;
+        }
+
+        .love-rain-text:nth-child(3) {
+            left: 25%;
+            animation-delay: 4s;
+            animation-duration: 9.5s;
+        }
+
+        .love-rain-text:nth-child(4) {
+            left: 35%;
+            animation-delay: 1s;
+            animation-duration: 12.5s;
+        }
+
+        .love-rain-text:nth-child(5) {
+            left: 45%;
+            animation-delay: 3s;
+            animation-duration: 9s;
+        }
+
+        .love-rain-text:nth-child(6) {
+            left: 55%;
+            animation-delay: 5s;
+            animation-duration: 10.5s;
+        }
+
+        .love-rain-text:nth-child(7) {
+            left: 65%;
+            animation-delay: 0.5s;
+            animation-duration: 11.5s;
+        }
+
+        .love-rain-text:nth-child(8) {
+            left: 75%;
+            animation-delay: 2.5s;
+            animation-duration: 10s;
+        }
+
+        .love-rain-text:nth-child(9) {
+            left: 85%;
+            animation-delay: 4.5s;
+            animation-duration: 12s;
+        }
+
+        .love-rain-text:nth-child(10) {
+            left: 95%;
+            animation-delay: 1.5s;
+            animation-duration: 8s;
+        }
+
+        /* استایل "For Ever" دور دایره */
+        .forever-around-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .forever-text-part {
+            position: absolute;
+            font-family: 'Delicious Handrawn', cursive;
+            font-size: 1.8em; /*  کمی بزرگتر */
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /*  هاله */
+            -webkit-text-stroke: 1px #6a994e; /*  خط دور حروف */
+            opacity: 0; /*  شروع با opacity صفر */
+            animation: fadeIn 0.5s ease-out 1.4s forwards; /* کاهش duration و delay */
+        }
+
+        .forever-text-for {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .forever-text-ever {
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+
+        /* استایل های دکمه های پنجره بازشو */
+        .reasons-popup-button, .angel-specs-popup-button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-family: 'Vazirmatn', cursive;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; /*  transition برای hover و active */
+            opacity: 0; /*  شروع با opacity صفر */
+            animation: fadeIn 0.5s ease-out 1.6s forwards; /* کاهش duration و delay */
+        }
+
+        .reasons-popup-button {
+            background-color: #f06292; /*  رنگ دکمه دلایل دوست داشتن صورتی */
+        }
+
+        .angel-specs-popup-button {
+            background-color: #a7c957; /* رنگ دکمه مشخصات فرشته سبز بهاری */
+        }
+
+        .reasons-popup-button:hover, .angel-specs-popup-button:hover {
+            transform: scale(1.05);
+            box-shadow: 6px 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .reasons-popup-button:active, .angel-specs-popup-button:active {
+            transform: scale(0.95);
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+
+        /* استایل های کلی پنجره های بازشو */
+        .reasons-modal, .angel-specs-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            opacity: 0; /*  شروع با opacity صفر */
+            transition: opacity 0.4s ease-out; /* transition برای انیمیشن باز و بسته شدن */
+        }
+
+        .reasons-modal.show, .angel-specs-modal.show {
+            display: block; /*  نمایش پنجره بازشو */
+            opacity: 1; /*  opacity یک برای نمایش کامل */
+        }
+
+
+        .reasons-modal-content, .angel-specs-modal-content {
+            background-color: #fefae0;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            position: relative;
+            text-align: center;
+            transform: translateY(-50px); /*  شروع با فاصله از بالا */
+            opacity: 0; /*  شروع با opacity صفر */
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out; /* transition برای انیمیشن باز و بسته شدن */
+        }
+
+        .reasons-modal.show .reasons-modal-content,
+        .angel-specs-modal.show .angel-specs-modal-content {
+            transform: translateY(0); /*  انتقال به موقعیت اصلی */
+            opacity: 1; /*  opacity یک برای نمایش کامل */
+        }
+
+
+        .reasons-modal-content h2, .angel-specs-modal-content h2 {
+            font-family: 'Amatic SC', cursive; /* فونت فانتزی برای عنوان پنجره بازشو */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .reasons-modal-content h2.animated { /*  انیمیشن جداگانه برای عنوان پنجره بازشو */
+            opacity: 0; /*  شروع با opacity صفر */
+            animation-duration: 0.5s ease-out forwards; /* کاهش duration و حذف delay */
+        }
+
+
+        .reasons-list-popup, .angel-specs-list-popup {
+            list-style: none;
+            padding: 0;
+        }
+
+        .reasons-list-popup.animated { /*  انیمیشن جداگانه برای لیست پنجره بازشو */
+            opacity: 0; /*  شروع با opacity صفر */
+            animation-duration: 0.5s ease-out forwards; /* کاهش duration و حذف delay */
+        }
+
+
+        .reasons-list-popup li {
+            font-family: 'Vazirmatn', cursive;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #6a994e;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .angel-specs-list-popup li {
+            font-family: 'Vazirmatn', cursive;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #e91e63;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            line-height: 1.8;
+        }
+
+
+        .reasons-list-popup li::before {
+            content: '♥';
+            color: #f06292;
+            display: inline-block;
+            width: 1em;
+            margin-left: 0;
+            margin-right: 0.5em;
+            text-shadow: none;
+        }
+
+
+        .angel-specs-list-popup li::before {
+            content: '⭐';
+            color: #c8e6c9;
+            display: inline-block;
+            width: 1em;
+            margin-left: 0;
+            margin-right: 0.5em;
+            text-shadow: none;
+        }
+
+
+        .close-button, .angel-specs-close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease; /*  transition برای hover دکمه بستن */
+            opacity: 0; /*  شروع با opacity صفر */
+            animation: fadeIn 0.5s ease-out 2.2s forwards; /* کاهش duration و delay */
+        }
+
+
+        .close-button {
+            right: 20px; /* موقعیت دکمه بستن پنجره دلایل دوست داشتن */
+        }
+
+        .angel-specs-close-button {
+            left: 20px; /* موقعیت دکمه بستن پنجره مشخصات فرشته */
+        }
+
+
+        .close-button:hover, .close-button:focus,
+        .angel-specs-close-button:hover, .angel-specs-close-button:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="love-rain-container">
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+        <div class="love-rain-text">I love you</div>
+    </div>
+
+    <h1>Aram and Mahyar</h1>
+    <div class="circle-frame">
+        <div class="days-together-text">دقیقا</div>
+        <span id="elapsed-time"></span>
+        <div>که به هم رسیدیم</div>
+        <div class="forever-around-circle">
+            <span class="forever-text-part forever-text-for">For</span>
+            <span class="forever-text-part forever-text-ever">Ever</span>
+        </div>
+    </div>
+
+
+    <div class="fountain-container" id="fountainContainer">
+    </div>
+
+    <button id="reasonsPopupButton" class="reasons-popup-button">
+        چرا دوستت دارم؟ ❤️
+    </button>
+
+    <div id="reasonsModal" class="reasons-modal">
+        <div class="reasons-modal-content">
+            <span class="close-button" id="closeButton">&times;</span>
+            <h2 class="animated">دلایل دوست داشتنم</h2>
+            <ul class="reasons-list-popup animated" id="reasonsListPopup">
+                <li>چونکه خوشگل تر از تو وجود نداره</li>
+                <li>چونکه بهترین دختر روی زمینی</li>
+                <li>چونکه آرام منی</li>
+                <li>چونکه قشنگترین خنده هارو داری</li>
+                <li>چونکه کسی نمیتونه جاتو بگیره</li>
+            </ul>
+        </div>
+    </div>
+
+    <button id="angelSpecsPopupButton" class="angel-specs-popup-button">
+        مشخصات یک فرشته ✨
+    </button>
+
+    <div id="angelSpecsModal" class="angel-specs-modal">
+        <div class="angel-specs-modal-content">
+            <span class="angel-specs-close-button" id="angelSpecsCloseButton">&times;</span>
+            <h2 class="animated">مشخصات یک فرشته ✨</h2>
+            <ul class="angel-specs-list-popup animated" id="angelSpecsListPopup">
+                <li><b>تاریخ تولدش:</b> ۷ آبان ۱۳۸۷</li>
+                <li><b>غذای مورد علاقه اش:</b> لازانیا</li>
+                <li><b>رنگ مورد علاقه اش:</b> آبی</li>
+                <li><b>مکان مورد علاقه اش:</b> هرجایی که من باشم</li>
+                <li><b>رنگ چشماش:</b> قهوه ای</li>
+                <li><b>نوشیدنی مورد علاقه اش:</b> شیرموز، شیرکاکائو، آیس کافی</li>
+                <li><b>خواننده مورد علاقه اش:</b> بیلی آیلیش</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+            function calculateElapsedTime() {
+                const startDate = new Date('2024-08-18T11:17:00');
+                const now = new Date();
+
+                const differenceInSeconds = Math.floor((now - startDate) / 1000);
+                if (differenceInSeconds < 0) {
+                    document.getElementById('elapsed-time').innerText = "هنوز نرسیده!";
+                    return;
+                }
+
+                const days = Math.floor(differenceInSeconds / (24 * 3600));
+                const hours = Math.floor((differenceInSeconds % (24 * 3600)) / 3600);
+                const minutes = Math.floor((differenceInSeconds % 3600) / 60);
+                const seconds = Math.floor(differenceInSeconds % 60);
+
+                let timeString = "";
+                if (days > 0) {
+                    timeString += days + " روز و ";
+                }
+                timeString += hours + " ساعت و " + minutes + " دقیقه و " + seconds + " ثانیه";
+
+                document.getElementById('elapsed-time').innerText = timeString;
+            }
+
+            calculateElapsedTime();
+            setInterval(calculateElapsedTime, 1000);
+
+            //  کد پنجره بازشو دلایل دوست داشتنت
+            const reasonsPopupButton = document.getElementById('reasonsPopupButton');
+            const reasonsModal = document.getElementById('reasonsModal');
+            const closeButton = document.getElementById('closeButton');
+
+            reasonsPopupButton.addEventListener('click', function() {
+                reasonsModal.classList.add('show'); /* نمایش با کلاس show برای انیمیشن */
+            });
+
+            closeButton.addEventListener('click', function() {
+                reasonsModal.classList.remove('show'); /*  پنهان کردن با حذف کلاس show */
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == reasonsModal) {
+                    reasonsModal.classList.remove('show'); /* بستن با حذف کلاس show */
+                }
+            });
+
+            //  کد پنجره بازشو مشخصات فرشته
+            const angelSpecsPopupButton = document.getElementById('angelSpecsPopupButton');
+            const angelSpecsModal = document.getElementById('angelSpecsModal');
+            const angelSpecsCloseButton = document.getElementById('angelSpecsCloseButton');
+
+            angelSpecsPopupButton.addEventListener('click', function() {
+                angelSpecsModal.classList.add('show'); /* نمایش با کلاس show برای انیمیشن */
+            });
+
+            angelSpecsCloseButton.addEventListener('click', function() {
+                angelSpecsModal.classList.remove('show'); /* پنهان کردن با حذف کلاس show */
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == angelSpecsModal) {
+                    angelSpecsModal.classList.remove('show'); /* بستن با حذف کلاس show */
+                }
+            });
+
+
+        });
+
+
+    </script>
+
+</body>
+</html>
